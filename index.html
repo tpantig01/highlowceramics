@@ -890,6 +890,68 @@
     color: rgba(255,255,255,0.2);
   }
 
+  /* COURSE NOTIFY MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 18, 24, 0.55);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 4px;
+    padding: 2.5rem;
+    max-width: 420px;
+    width: 90%;
+    position: relative;
+  }
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: var(--hl-mid);
+    line-height: 1;
+  }
+  .modal-course {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hl-purple);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .modal h3 {
+    font-size: 1.2rem;
+    margin: 0 0 0.4rem;
+  }
+  .modal p {
+    font-size: 0.88rem;
+    color: var(--hl-mid);
+    margin: 0 0 1.5rem;
+  }
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .modal-form input {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--hl-border);
+    border-radius: 2px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--hl-dark);
+  }
+  .modal-form input:focus { outline: none; border-color: var(--hl-purple); }
+
   /* TOAST */
   .toast {
     position: fixed;
@@ -1029,7 +1091,7 @@
         <p class="course-desc">Six weeks, zero overwhelm. Build real skills from centering through your first finished forms, with body mechanics baked in from day one.</p>
         <div class="course-footer">
           <div class="course-price">— <small>Notify me</small></div>
-          <a href="#signup" class="btn-sm outline">Notify me</a>
+          <button class="btn-sm outline" onclick="openCourseModal('Wheel Throwing Foundations')">Notify me</button>
         </div>
       </div>
     </div>
@@ -1044,7 +1106,7 @@
         <p class="course-desc">Why your back hurts, why your pots aren't centering, and what your body has to do with both. Prevent injury before it sidelines you.</p>
         <div class="course-footer">
           <div class="course-price">— <small>Notify me</small></div>
-          <a href="#signup" class="btn-sm outline">Notify me</a>
+          <button class="btn-sm outline" onclick="openCourseModal('Body Mechanics for Ceramicists')">Notify me</button>
         </div>
       </div>
     </div>
@@ -1059,7 +1121,7 @@
         <p class="course-desc">Past "technically fine," into intentional. A workshop for ceramicists who have the skills but aren't sure what they're making them for.</p>
         <div class="course-footer">
           <div class="course-price">— <small>Notify me</small></div>
-          <a href="#signup" class="btn-sm outline">Notify me</a>
+          <button class="btn-sm outline" onclick="openCourseModal('Finding Your Artistic Voice')">Notify me</button>
         </div>
       </div>
     </div>
@@ -1197,6 +1259,29 @@
   <p class="footer-copy">&copy; 2026 High Low Ceramics</p>
 </footer>
 
+<!-- Hidden form for Netlify to detect course-notify submissions -->
+<form name="course-notify" method="POST" data-netlify="true" hidden>
+  <input type="hidden" name="form-name" value="course-notify">
+  <input type="email" name="email">
+  <input type="text" name="course">
+</form>
+
+<!-- Course notify modal -->
+<div class="modal-overlay" id="courseModal" onclick="closeCourseModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeCourseModal()">&times;</button>
+    <p class="modal-course">Course notification</p>
+    <h3 id="modal-course-name"></h3>
+    <p>Drop your email and we'll let you know as soon as this course is available.</p>
+    <form class="modal-form" onsubmit="handleCourseNotify(event)">
+      <input type="hidden" name="form-name" value="course-notify">
+      <input type="hidden" name="course" id="modal-course-field">
+      <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required>
+      <button type="submit" class="btn-primary">Notify me</button>
+    </form>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1215,6 +1300,31 @@ function handleSignup(e) {
     .then(function() {
       form.reset();
       showToast(name ? 'Thanks ' + name + '! You\'re on the list.' : 'You\'re on the list!');
+    })
+    .catch(function() { showToast('Something went wrong. Please try again.'); });
+}
+
+function openCourseModal(course) {
+  document.getElementById('modal-course-name').textContent = course;
+  document.getElementById('modal-course-field').value = course;
+  document.getElementById('courseModal').classList.add('open');
+}
+
+function closeCourseModal(e) {
+  if (!e || e.target === document.getElementById('courseModal') || !e.target) {
+    document.getElementById('courseModal').classList.remove('open');
+  }
+}
+
+function handleCourseNotify(e) {
+  e.preventDefault();
+  var form = e.target;
+  var course = document.getElementById('modal-course-field').value;
+  fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
+    .then(function() {
+      form.reset();
+      document.getElementById('courseModal').classList.remove('open');
+      showToast('Got it! We\'ll notify you when ' + course + ' is ready.');
     })
     .catch(function() { showToast('Something went wrong. Please try again.'); });
 }
