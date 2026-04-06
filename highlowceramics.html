@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High Low Ceramics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --hl-purple: #7B3F94;
+    --hl-red: #C8102E;
+    --hl-cream: #FAF7F2;
+    --hl-warm: #F2EDE4;
+    --hl-dark: #1A1218;
+    --hl-mid: #4A3D48;
+    --hl-muted: #8C7D8A;
+    --hl-border: rgba(123, 63, 148, 0.15);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--hl-cream);
+    color: var(--hl-dark);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 2.5rem;
+    background: rgba(250, 247, 242, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--hl-border);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--hl-dark);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-logo span {
+    color: var(--hl-purple);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--hl-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--hl-purple); }
+
+  .nav-cta {
+    background: var(--hl-purple);
+    color: white !important;
+    padding: 0.55rem 1.25rem;
+    border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: #6a3380 !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem 5rem 5rem;
+    position: relative;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: -40px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px solid rgba(123, 63, 148, 0.12);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hl-purple);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-headline {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 1.05;
+    color: var(--hl-dark);
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-headline em {
+    color: var(--hl-purple);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--hl-mid);
+    max-width: 420px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--hl-purple);
+    color: white;
+    padding: 0.85rem 2rem;
+    border: none;
+    border-radius: 2px;
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: #6a3380; transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--hl-dark);
+    padding: 0.85rem 2rem;
+    border: 1px solid rgba(26, 18, 24, 0.25);
+    border-radius: 2px;
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--hl-purple); color: var(--hl-purple); }
+
+  .hero-right {
+    background: var(--hl-warm);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--hl-muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .hero-placeholder-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(139, 125, 138, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* MARQUEE */
+  .marquee-bar {
+    background: var(--hl-purple);
+    color: white;
+    padding: 0.9rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .marquee-inner {
+    display: inline-flex;
+    animation: marquee 28s linear infinite;
+    gap: 0;
+  }
+
+  .marquee-item {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding: 0 3rem;
+  }
+
+  .marquee-dot {
+    opacity: 0.5;
+    padding: 0 0.5rem;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 5rem; }
+
+  .section-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hl-purple);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.1;
+    color: var(--hl-dark);
+    margin-bottom: 1.25rem;
+  }
+
+  .section-body {
+    font-size: 1rem;
+    color: var(--hl-mid);
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 560px;
+  }
+
+  /* EMAIL SIGNUP */
+  #signup {
+    background: var(--hl-dark);
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  #signup .section-title { color: white; }
+  #signup .section-body { color: rgba(255,255,255,0.6); }
+
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .signup-form input[type="text"],
+  .signup-form input[type="email"] {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: white;
+    padding: 0.9rem 1.25rem;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .signup-form input::placeholder { color: rgba(255,255,255,0.3); }
+  .signup-form input:focus { border-color: rgba(200, 16, 46, 0.6); }
+
+  .signup-form button {
+    background: var(--hl-red);
+    color: white;
+    padding: 0.9rem 2rem;
+    border: none;
+    border-radius: 2px;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background 0.2s;
+  }
+
+  .signup-form button:hover { background: #a80d27; }
+
+  .signup-perks {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .signup-perk {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .perk-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--hl-red);
+    margin-top: 0.55rem;
+    flex-shrink: 0;
+  }
+
+  /* COURSES */
+  #courses {
+    background: var(--hl-cream);
+  }
+
+  .courses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3.5rem;
+  }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .course-card {
+    background: white;
+    border: 1px solid var(--hl-border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(123, 63, 148, 0.1);
+  }
+
+  .course-thumb {
+    background: var(--hl-warm);
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--hl-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .course-thumb-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--hl-purple);
+  }
+
+  .course-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--hl-purple);
+    color: white;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .course-badge.coming-soon {
+    background: var(--hl-red);
+  }
+
+  .course-body {
+    padding: 1.5rem;
+  }
+
+  .course-title {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--hl-dark);
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
+  }
+
+  .course-desc {
+    font-size: 0.88rem;
+    color: var(--hl-mid);
+    line-height: 1.65;
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+  }
+
+  .course-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--hl-border);
+  }
+
+  .course-price {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--hl-dark);
+  }
+
+  .course-price small {
+    font-size: 0.8rem;
+    color: var(--hl-muted);
+    font-weight: 400;
+  }
+
+  .btn-sm {
+    font-size: 0.8rem;
+    padding: 0.5rem 1.1rem;
+    background: var(--hl-purple);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: background 0.2s;
+  }
+
+  .btn-sm:hover { background: #6a3380; }
+
+  .btn-sm.outline {
+    background: transparent;
+    color: var(--hl-purple);
+    border: 1px solid var(--hl-purple);
+  }
+
+  .btn-sm.outline:hover { background: var(--hl-purple); color: white; }
+
+  /* DOWNLOADS */
+  #downloads {
+    background: var(--hl-warm);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .download-card {
+    background: white;
+    border: 1px solid var(--hl-border);
+    border-radius: 4px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .download-card::before {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(123, 63, 148, 0.05);
+  }
+
+  .download-icon {
+    width: 56px;
+    height: 72px;
+    background: var(--hl-purple);
+    border-radius: 3px 3px 3px 3px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .download-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    background: rgba(255,255,255,0.2);
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+  }
+
+  .download-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+    opacity: 0.9;
+  }
+
+  .download-name {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--hl-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .download-sub {
+    font-size: 0.85rem;
+    color: var(--hl-muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .download-features {
+    list-style: none;
+    margin-bottom: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .download-features li {
+    font-size: 0.88rem;
+    color: var(--hl-mid);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .download-features li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--hl-purple);
+    margin-top: 0.55rem;
+    flex-shrink: 0;
+  }
+
+  .price-tag {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--hl-dark);
+    margin-bottom: 1.25rem;
+  }
+
+  .price-tag span {
+    font-size: 1rem;
+    color: var(--hl-muted);
+    font-weight: 300;
+  }
+
+  /* BOOKS */
+  #books {
+    background: var(--hl-cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .book-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+  }
+
+  .book-cover {
+    width: 220px;
+    height: 310px;
+    background: linear-gradient(135deg, var(--hl-purple) 0%, #5a2e6e 100%);
+    border-radius: 3px 8px 8px 3px;
+    position: relative;
+    box-shadow: 8px 8px 0 rgba(123, 63, 148, 0.15), 16px 16px 0 rgba(123, 63, 148, 0.07);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+
+  .book-cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    border-radius: 3px 0 0 3px;
+  }
+
+  .book-cover-title {
+    font-family: var(--serif);
+    color: white;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    font-style: italic;
+  }
+
+  .book-cover-sub {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .book-cover-decor {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+    margin: 1rem auto;
+  }
+
+  .book-cover-author {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.06em;
+  }
+
+  .notify-form {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+    flex-wrap: wrap;
+  }
+
+  .notify-form input {
+    flex: 1;
+    min-width: 200px;
+    border: 1px solid rgba(26, 18, 24, 0.2);
+    background: white;
+    padding: 0.75rem 1.1rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    border-radius: 2px;
+    outline: none;
+    color: var(--hl-dark);
+    transition: border-color 0.2s;
+  }
+
+  .notify-form input:focus { border-color: var(--hl-purple); }
+
+  .coming-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--hl-red);
+    margin-bottom: 1rem;
+  }
+
+  .coming-badge::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--hl-red);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.75); }
+  }
+
+  /* ABOUT */
+  #about {
+    background: var(--hl-warm);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-img-wrap {
+    position: relative;
+  }
+
+  .about-placeholder {
+    background: var(--hl-cream);
+    border: 1px dashed rgba(139, 125, 138, 0.35);
+    border-radius: 4px;
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
+    color: var(--hl-muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .about-placeholder-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(139, 125, 138, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-accent-block {
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1.5rem;
+    background: var(--hl-purple);
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: 4px;
+    max-width: 220px;
+  }
+
+  .about-accent-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    color: white;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .about-accent-label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.06em;
+    font-weight: 300;
+  }
+
+  .about-body {
+    font-size: 1rem;
+    color: var(--hl-mid);
+    font-weight: 300;
+    line-height: 1.85;
+    margin-bottom: 1rem;
+  }
+
+  .about-body strong {
+    color: var(--hl-dark);
+    font-weight: 500;
+  }
+
+  /* SOCIAL */
+  #social {
+    background: var(--hl-dark);
+    text-align: center;
+    padding: 5rem;
+  }
+
+  #social .section-title { color: white; }
+  #social .section-body { color: rgba(255,255,255,0.5); margin: 0 auto 2.5rem; text-align: center; }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.75rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 2px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .social-link:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.25);
+  }
+
+  .social-icon {
+    width: 18px;
+    height: 18px;
+    opacity: 0.7;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--hl-dark);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2.5rem 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .footer-logo strong { color: rgba(255,255,255,0.8); }
+
+  .footer-nav {
+    display: flex;
+    gap: 1.75rem;
+    list-style: none;
+  }
+
+  .footer-nav a {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-nav a:hover { color: rgba(255,255,255,0.65); }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--hl-purple);
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    z-index: 999;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 300px; }
+    .hero-left { padding: 3rem 2rem; }
+    section { padding: 4rem 2rem; }
+    #signup, #downloads, #books, #about { grid-template-columns: 1fr; gap: 3rem; }
+    .courses-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1.25rem; text-align: center; padding: 2rem; }
+    .about-accent-block { position: relative; bottom: auto; right: auto; margin-top: 1.5rem; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo"><span>High</span> Low Ceramics</a>
+  <ul class="nav-links">
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#downloads">Downloads</a></li>
+    <li><a href="#books">Books</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#signup" class="nav-cta">Get on the list</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Ceramics education for humans</p>
+    <h1 class="hero-headline">Throw, build,<br><em>and don't</em><br>take it too seriously.</h1>
+    <p class="hero-sub">
+      Online courses, hands-on workshops, and resources for ceramicists who want to get better without losing the joy of it.
+    </p>
+    <div class="hero-actions">
+      <a href="#courses" class="btn-primary">Browse courses</a>
+      <a href="#signup" class="btn-secondary">Join the list</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-placeholder">
+      <div class="hero-placeholder-circle">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="14" stroke="rgba(139,125,138,0.35)" stroke-width="1.5" stroke-dasharray="4 3"/>
+        </svg>
+      </div>
+      <span>your photo here</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar" aria-hidden="true">
+  <div class="marquee-inner">
+    <span class="marquee-item">Wheel Throwing</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Handbuilding</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Body Mechanics</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Online Courses</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Digital Downloads</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Injury Prevention</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Workshop Resources</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Wheel Throwing</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Handbuilding</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Body Mechanics</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Online Courses</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Digital Downloads</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Injury Prevention</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Workshop Resources</span><span class="marquee-dot">·</span>
+  </div>
+</div>
+
+<!-- EMAIL SIGNUP -->
+<section id="signup">
+  <div>
+    <p class="section-tag">Stay in the loop</p>
+    <h2 class="section-title">News, launches, and the occasional unhinged pottery take.</h2>
+    <p class="section-body">
+      Be the first to know when new courses drop, when the Wheelside Handbook is available, and when workshops open up in your city.
+    </p>
+    <div class="signup-perks">
+      <div class="signup-perk"><div class="perk-dot"></div><span>Early access to new courses and digital downloads</span></div>
+      <div class="signup-perk"><div class="perk-dot"></div><span>Subscriber-only discounts when things launch</span></div>
+      <div class="signup-perk"><div class="perk-dot"></div><span>Behind-the-scenes curriculum and teaching content</span></div>
+    </div>
+  </div>
+  <div class="signup-form">
+    <input type="text" id="signup-name" placeholder="First name" autocomplete="given-name">
+    <input type="email" id="signup-email" placeholder="Email address" autocomplete="email">
+    <button onclick="handleSignup()">Count me in</button>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="courses-header">
+    <div>
+      <p class="section-tag">Online courses</p>
+      <h2 class="section-title">Learn at the wheel,<br>wherever you are.</h2>
+    </div>
+    <a href="#" class="btn-secondary" style="white-space: nowrap;">View all</a>
+  </div>
+  <div class="courses-grid">
+    <div class="course-card">
+      <div class="course-thumb">
+        <div class="course-thumb-accent"></div>
+        <span>course photo</span>
+        <span class="course-badge coming-soon">Coming soon</span>
+      </div>
+      <div class="course-body">
+        <h3 class="course-title">Wheel Throwing Foundations</h3>
+        <p class="course-desc">Six weeks, zero overwhelm. Build real skills from centering through your first finished forms, with body mechanics baked in from day one.</p>
+        <div class="course-footer">
+          <div class="course-price">— <small>Notify me</small></div>
+          <a href="#signup" class="btn-sm outline">Notify me</a>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-thumb">
+        <div class="course-thumb-accent"></div>
+        <span>course photo</span>
+        <span class="course-badge coming-soon">Coming soon</span>
+      </div>
+      <div class="course-body">
+        <h3 class="course-title">Body Mechanics for Ceramicists</h3>
+        <p class="course-desc">Why your back hurts, why your pots aren't centering, and what your body has to do with both. Prevent injury before it sidelines you.</p>
+        <div class="course-footer">
+          <div class="course-price">— <small>Notify me</small></div>
+          <a href="#signup" class="btn-sm outline">Notify me</a>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-thumb">
+        <div class="course-thumb-accent"></div>
+        <span>course photo</span>
+        <span class="course-badge coming-soon">Coming soon</span>
+      </div>
+      <div class="course-body">
+        <h3 class="course-title">Finding Your Artistic Voice</h3>
+        <p class="course-desc">Past "technically fine," into intentional. A workshop for ceramicists who have the skills but aren't sure what they're making them for.</p>
+        <div class="course-footer">
+          <div class="course-price">— <small>Notify me</small></div>
+          <a href="#signup" class="btn-sm outline">Notify me</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIGITAL DOWNLOADS -->
+<section id="downloads">
+  <div>
+    <p class="section-tag">Digital downloads</p>
+    <h2 class="section-title">Resources you'll actually use at the wheel.</h2>
+    <p class="section-body">
+      Practical, no-fluff reference materials designed for studio use. Waterproof-ready, stand-up format, built for the way ceramicists actually work.
+    </p>
+    <p class="about-body" style="margin-top: 1.25rem;">
+      More downloads in development. <a href="#signup" style="color: var(--hl-purple); text-decoration: none; font-weight: 500;">Join the list</a> to get notified when new resources drop.
+    </p>
+  </div>
+  <div>
+    <div class="download-card">
+      <div class="download-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+        </svg>
+      </div>
+      <h3 class="download-name">The Wheelside Handbook</h3>
+      <p class="download-sub">Your studio companion. Throwing ratios, common fixes, body position cues, and technique reminders in a format that survives clay water.</p>
+      <ul class="download-features">
+        <li>Waterproof-ready print format</li>
+        <li>Stand-up desk size for easy studio reference</li>
+        <li>Wheel throwing ratios and proportions guide</li>
+        <li>Troubleshooting quick-reference</li>
+        <li>Body mechanics and posture cues</li>
+      </ul>
+      <div class="price-tag">$22 <span>– $32</span></div>
+      <a href="#signup" class="btn-sm">Notify me when it's ready</a>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKS -->
+<section id="books">
+  <div class="book-visual">
+    <div style="position: relative;">
+      <div class="book-cover">
+        <p class="book-cover-title">High Low Ceramics</p>
+        <div class="book-cover-decor"></div>
+        <p class="book-cover-sub">a ceramics book</p>
+        <div style="margin-top: 2rem;"></div>
+        <p class="book-cover-author">Tahnee Pantig</p>
+      </div>
+      <div style="position: absolute; top: -1.5rem; right: -1.5rem; background: var(--hl-red); color: white; padding: 0.75rem 1rem; border-radius: 4px; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; text-align: center; line-height: 1.5;">
+        In<br>progress
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="coming-badge">In progress</div>
+    <p class="section-tag">Books</p>
+    <h2 class="section-title">Something to put on your shelf. Or your studio floor.</h2>
+    <p class="section-body" style="max-width: 100%;">
+      A proper ceramics book is in the works. The kind that doesn't take itself too seriously, covers the stuff other books skip, and is genuinely useful whether you've been at it for six months or six years.
+    </p>
+    <p class="about-body" style="margin-top: 1rem;">
+      Get on the list for updates, early access, and a say in what goes in it.
+    </p>
+    <div class="notify-form">
+      <input type="email" id="book-email" placeholder="your@email.com" autocomplete="email">
+      <button class="btn-primary" onclick="handleBookNotify()">Notify me</button>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-wrap">
+    <div class="about-placeholder">
+      <div class="about-placeholder-img">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <circle cx="14" cy="10" r="5" stroke="rgba(139,125,138,0.4)" stroke-width="1.5"/>
+          <path d="M4 24c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="rgba(139,125,138,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span>your photo here</span>
+    </div>
+    <div class="about-accent-block">
+      <div class="about-accent-num">10+</div>
+      <div class="about-accent-label">years teaching ceramics</div>
+    </div>
+  </div>
+  <div>
+    <p class="section-tag">About</p>
+    <h2 class="section-title">Hi, I'm Tahnee. I teach ceramics for people who don't take themselves seriously.</h2>
+    <p class="about-body">
+      <strong>High Low Ceramics</strong> is my approach to teaching: rigorous enough to actually help you improve, loose enough to remember why you started. I've been teaching wheel throwing and handbuilding for over a decade, and I bring a background in dance and athletics to every class.
+    </p>
+    <p class="about-body">
+      That means you'll hear a lot about <strong>body mechanics, movement, and injury prevention</strong> alongside the actual clay stuff. Because you can't throw a pot if your back's out.
+    </p>
+    <a href="#signup" class="btn-secondary" style="margin-top: 0.5rem; display: inline-block;">Follow along</a>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section id="social">
+  <p class="section-tag" style="color: rgba(255,255,255,0.4);">Find me online</p>
+  <h2 class="section-title">Come make fun of<br>my glazing attempts.</h2>
+  <p class="section-body">Classes, behind-the-scenes, technique tips, and the occasional disaster. All of it on Instagram and TikTok.</p>
+  <div class="social-links">
+    <a href="https://instagram.com/highlow.ceramics" target="_blank" rel="noopener" class="social-link">
+      <svg class="social-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      </svg>
+      @highlow.ceramics on Instagram
+    </a>
+    <a href="https://tiktok.com/@highlow.ceramics" target="_blank" rel="noopener" class="social-link">
+      <svg class="social-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.25 8.25 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/>
+      </svg>
+      @highlow.ceramics on TikTok
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><strong>High Low</strong> Ceramics</div>
+  <ul class="footer-nav">
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#downloads">Downloads</a></li>
+    <li><a href="#books">Books</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="mailto:tahnee.pantig@gmail.com">Contact</a></li>
+  </ul>
+  <p class="footer-copy">&copy; 2026 High Low Ceramics</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 3500);
+}
+
+function handleSignup() {
+  var name = document.getElementById('signup-name').value.trim();
+  var email = document.getElementById('signup-email').value.trim();
+  if (!email || !email.includes('@')) { showToast('Please enter a valid email address.'); return; }
+  document.getElementById('signup-name').value = '';
+  document.getElementById('signup-email').value = '';
+  showToast(name ? 'Thanks ' + name + '! You\'re on the list.' : 'You\'re on the list!');
+}
+
+function handleBookNotify() {
+  var email = document.getElementById('book-email').value.trim();
+  if (!email || !email.includes('@')) { showToast('Please enter a valid email address.'); return; }
+  document.getElementById('book-email').value = '';
+  showToast('Got it. You\'ll hear when the book is ready.');
+}
+</script>
+
+</body>
+</html>
