@@ -1,0 +1,18 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "courses"
+    label: "Courses"
+    folder: "_data/courses"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Status", name: "status", widget: "select", options: ["coming_soon", "live"] }
+      - { label: "Price", name: "price", widget: "string", required: false }
