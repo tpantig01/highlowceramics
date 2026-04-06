@@ -1000,11 +1000,12 @@
       <div class="signup-perk"><div class="perk-dot"></div><span>Behind-the-scenes curriculum and teaching content</span></div>
     </div>
   </div>
-  <div class="signup-form">
-    <input type="text" id="signup-name" placeholder="First name" autocomplete="given-name">
-    <input type="email" id="signup-email" placeholder="Email address" autocomplete="email">
-    <button onclick="handleSignup()">Count me in</button>
-  </div>
+  <form name="signup" method="POST" data-netlify="true" class="signup-form" onsubmit="handleSignup(event)">
+    <input type="hidden" name="form-name" value="signup">
+    <input type="text" name="name" id="signup-name" placeholder="First name" autocomplete="given-name">
+    <input type="email" name="email" id="signup-email" placeholder="Email address" autocomplete="email" required>
+    <button type="submit">Count me in</button>
+  </form>
 </section>
 
 <!-- COURSES -->
@@ -1125,10 +1126,11 @@
     <p class="about-body" style="margin-top: 1rem;">
       Get on the list for updates, early access, and a say in what goes in it.
     </p>
-    <div class="notify-form">
-      <input type="email" id="book-email" placeholder="your@email.com" autocomplete="email">
-      <button class="btn-primary" onclick="handleBookNotify()">Notify me</button>
-    </div>
+    <form name="book-notify" method="POST" data-netlify="true" class="notify-form" onsubmit="handleBookNotify(event)">
+      <input type="hidden" name="form-name" value="book-notify">
+      <input type="email" name="email" id="book-email" placeholder="your@email.com" autocomplete="email" required>
+      <button type="submit" class="btn-primary">Notify me</button>
+    </form>
   </div>
 </section>
 
@@ -1205,20 +1207,27 @@ function showToast(msg) {
   setTimeout(function() { t.classList.remove('show'); }, 3500);
 }
 
-function handleSignup() {
+function handleSignup(e) {
+  e.preventDefault();
+  var form = e.target;
   var name = document.getElementById('signup-name').value.trim();
-  var email = document.getElementById('signup-email').value.trim();
-  if (!email || !email.includes('@')) { showToast('Please enter a valid email address.'); return; }
-  document.getElementById('signup-name').value = '';
-  document.getElementById('signup-email').value = '';
-  showToast(name ? 'Thanks ' + name + '! You\'re on the list.' : 'You\'re on the list!');
+  fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
+    .then(function() {
+      form.reset();
+      showToast(name ? 'Thanks ' + name + '! You\'re on the list.' : 'You\'re on the list!');
+    })
+    .catch(function() { showToast('Something went wrong. Please try again.'); });
 }
 
-function handleBookNotify() {
-  var email = document.getElementById('book-email').value.trim();
-  if (!email || !email.includes('@')) { showToast('Please enter a valid email address.'); return; }
-  document.getElementById('book-email').value = '';
-  showToast('Got it. You\'ll hear when the book is ready.');
+function handleBookNotify(e) {
+  e.preventDefault();
+  var form = e.target;
+  fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
+    .then(function() {
+      form.reset();
+      showToast('Got it. You\'ll hear when the book is ready.');
+    })
+    .catch(function() { showToast('Something went wrong. Please try again.'); });
 }
 </script>
 
