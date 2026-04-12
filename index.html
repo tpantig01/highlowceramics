@@ -1062,12 +1062,7 @@
       <div class="signup-perk"><div class="perk-dot"></div><span>Behind-the-scenes curriculum and teaching content</span></div>
     </div>
   </div>
-  <form name="signup" method="POST" data-netlify="true" class="signup-form" onsubmit="handleSignup(event)">
-    <input type="hidden" name="form-name" value="signup">
-    <input type="text" name="name" id="signup-name" placeholder="First name" autocomplete="given-name">
-    <input type="email" name="email" id="signup-email" placeholder="Email address" autocomplete="email" required>
-    <button type="submit">Count me in</button>
-  </form>
+  <script async data-uid="4877d48aef" src="https://highlowceramics.kit.com/4877d48aef/index.js"></script>
 </section>
 
 <!-- COURSES -->
@@ -1292,17 +1287,6 @@ function showToast(msg) {
   setTimeout(function() { t.classList.remove('show'); }, 3500);
 }
 
-function handleSignup(e) {
-  e.preventDefault();
-  var form = e.target;
-  var name = document.getElementById('signup-name').value.trim();
-  fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
-    .then(function() {
-      form.reset();
-      showToast(name ? 'Thanks ' + name + '! You\'re on the list.' : 'You\'re on the list!');
-    })
-    .catch(function() { showToast('Something went wrong. Please try again.'); });
-}
 
 function openCourseModal(course) {
   document.getElementById('modal-course-name').textContent = course;
